@@ -1,6 +1,7 @@
 from objective_evaluation_result import ObjectiveEvaluationResult
 from src.core.optimization.variational_parameters import VariationalParameters
 
+
 class OptimizationResult:
     """
     The result of an iterative optimization algorithm

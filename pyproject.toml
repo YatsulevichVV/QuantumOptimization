@@ -1,6 +1,6 @@
 [project]
 name = "my-project"
-version = "0.0.3"
+version = "0.0.4"
 description = "Framework for variational quantum algorithms"
 
 dependencies = [

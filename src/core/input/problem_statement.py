@@ -8,7 +8,7 @@ class ProblemStatement(ABC):
     Attributes
     ----------
     tensor : np.ndarray
-        A tensor in which a discrete optimization problem is encoded
+        A tensor in which a discrete optimization problem is encoded.
     """
 
     def __init__(self, tensor: np.ndarray):
