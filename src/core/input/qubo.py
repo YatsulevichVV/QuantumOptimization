@@ -1,9 +1,6 @@
 from src.core.input.problem_statement import ProblemStatement
 import numpy as np
-import logging
 
-
-logger = logging.getLogger(__file__)
 
 class QUBO(ProblemStatement):
     """

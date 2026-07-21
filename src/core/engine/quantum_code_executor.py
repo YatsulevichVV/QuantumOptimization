@@ -11,5 +11,24 @@ class QuantumCodeExecutor(ABC):
 
     @abstractmethod
     def execute(self, code: QuantumCode) -> ObjectiveEvaluationResult:
-        ...
+        """
+        Execute quantum code and return the evaluation result.
+
+        The method submits the provided quantum code to the execution
+        backend (physical quantum processor or simulator), performs the
+        required measurements, and converts the obtained results into an
+        objective evaluation.
+
+        Parameters
+        ----------
+        code : QuantumCode
+            Quantum program represented in QASM format together with its
+            execution context and metadata.
+
+        Returns
+        -------
+        ObjectiveEvaluationResult
+            Result of the quantum execution containing measurement outcomes.
+        """
+        pass
 

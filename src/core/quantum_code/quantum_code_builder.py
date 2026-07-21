@@ -17,7 +17,7 @@ class QuantumCodeBuilder(ABC):
         A quantum circuit template that will be used for compilation to avoid multiple code builds.
     """
 
-    # TODO: code_template is the template for compiling.
+    # TODO: проработать систему компиляции
     def __init__(self, code_template: str):
         ...
 

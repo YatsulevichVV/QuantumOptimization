@@ -24,7 +24,7 @@ class GridSearchOptimizer(Optimizer):
         Epsilon-area stop criterion.
     """
 
-    # TODO: Add the grid parameters to the class attributes.
+    # TODO: Добавить шаг для формирования сетки
     def __init__(
             self,
             objective: ObjectiveEvaluator,

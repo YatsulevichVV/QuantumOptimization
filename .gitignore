@@ -1,2 +1,5 @@
 /.idea
 /.venv
+main.py
+*.log
+__pycache__/

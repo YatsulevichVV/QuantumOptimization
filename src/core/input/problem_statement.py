@@ -1,9 +1,6 @@
 from abc import ABC, abstractmethod
 import numpy as np
-import logging
 
-
-logger = logging.getLogger(__file__)
 
 class ProblemStatement(ABC):
     """
@@ -28,4 +25,8 @@ class ProblemStatement(ABC):
 
     @abstractmethod
     def grid_search_max(self) -> float:
+        pass
+
+    @abstractmethod
+    def energy(self, x: np.ndarray) -> float:
         pass
