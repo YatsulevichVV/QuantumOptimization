@@ -1,16 +1,27 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import numpy as np
+import logging
+from src.core.input.qubo import QUBO
 
 
 def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+    print(f'Hi, {name}')
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        filename='py_log.log',
+        filemode='w'
+    )
+    logger = logging.getLogger(__file__)
+
+    try:
+        logger.info('Starting the program')
+        matrix = np.array([[1, 2], [3, 4], [5, 6]])
+        qubo = QUBO(matrix)
+        logger.info('Successfully initialized the program')
+    except Exception as e:
+        logger.exception(e)
+        raise

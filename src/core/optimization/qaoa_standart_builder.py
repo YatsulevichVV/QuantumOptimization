@@ -1,6 +1,6 @@
 import numpy as np
 from src.core.optimization.variational_parameters import VariationalParameters
-from variational_parameters_builder import VariationalParameterBuilder
+from src.core.optimization.variational_parameters_builder import VariationalParameterBuilder
 
 
 class QAOAStandardBuilder(VariationalParameterBuilder):

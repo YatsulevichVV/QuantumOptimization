@@ -1,4 +1,4 @@
-from quantum_code_executor import QuantumCodeExecutor
+from src.core.engine.quantum_code_executor import QuantumCodeExecutor
 from src.core.quantum_code.quantum_code import QuantumCode
 from src.core.output.objective_evaluation_result import ObjectiveEvaluationResult
 

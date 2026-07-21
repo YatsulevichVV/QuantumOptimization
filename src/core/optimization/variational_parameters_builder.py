@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from variational_parameters import VariationalParameters
+from src.core.optimization.variational_parameters import VariationalParameters
 import numpy as np
 
 

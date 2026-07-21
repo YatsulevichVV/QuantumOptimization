@@ -1,5 +1,9 @@
 from abc import ABC, abstractmethod
 import numpy as np
+import logging
+
+
+logger = logging.getLogger(__file__)
 
 class ProblemStatement(ABC):
     """
@@ -12,7 +16,11 @@ class ProblemStatement(ABC):
     """
 
     def __init__(self, tensor: np.ndarray):
-        ...
+        if not isinstance(tensor, np.ndarray):
+            raise TypeError(f"Tensor must be numpy.ndarray, got {type(tensor).__name__}")
+        if tensor.size == 0:
+            raise ValueError("Tensor must not be empty")
+        self.tensor = tensor
 
     @abstractmethod
     def grid_search_min(self) -> float:

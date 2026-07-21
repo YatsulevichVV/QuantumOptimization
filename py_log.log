@@ -1,0 +1,8 @@
+2026-07-21 12:14:54,514 - C:\ProgramSoftware\QuantumOptimization\main.py - INFO - Starting the program
+2026-07-21 12:14:54,514 - C:\ProgramSoftware\QuantumOptimization\main.py - ERROR - The matrix must be square
+Traceback (most recent call last):
+  File "C:\ProgramSoftware\QuantumOptimization\main.py", line 23, in <module>
+    qubo = QUBO(matrix)
+  File "C:\ProgramSoftware\QuantumOptimization\src\core\input\qubo.py", line 25, in __init__
+    raise ValueError("The matrix must be square")
+ValueError: The matrix must be square

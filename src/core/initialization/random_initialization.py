@@ -1,4 +1,4 @@
-from initializer import Initializer
+from src.core.initialization.initializer import Initializer
 from src.core.optimization.variational_parameters import VariationalParameters
 
 

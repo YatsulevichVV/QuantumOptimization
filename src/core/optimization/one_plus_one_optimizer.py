@@ -1,6 +1,6 @@
 from src.core.optimization.optimizer import Optimizer
 from src.core.output.optimization_result import OptimizationResult
-from variational_parameters_builder import VariationalParameterBuilder
+from src.core.optimization.variational_parameters_builder import VariationalParameterBuilder
 from src.core.initialization.initializer import Initializer
 from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 
