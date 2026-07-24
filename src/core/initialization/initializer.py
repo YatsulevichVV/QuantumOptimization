@@ -8,5 +8,15 @@ class Initializer(ABC):
     """
 
     @abstractmethod
-    def initialize(self) -> VariationalParameters:
-        ...
+    def initialize(self, size: int) -> VariationalParameters:
+        """
+        Initializes the variational parameters.
+
+        Args:
+            size: The count of the variational parameters.
+
+        Returns:
+            A ``VariationalParameters`` object containing the initial values
+            of the variational parameters.
+        """
+        pass

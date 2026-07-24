@@ -22,6 +22,11 @@ class Optimizer(ABC):
     epsilon: float
         Epsilon-area stop criterion.
     """
+    objective: ObjectiveEvaluator
+    initializer: Initializer
+    parameters_builder: VariationalParameterBuilder
+    max_iterations: int
+    epsilon: float
 
     def __init__(
             self,

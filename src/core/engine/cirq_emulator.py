@@ -3,7 +3,6 @@ from src.core.quantum_code.quantum_code import QuantumCode
 from src.core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from cirq.contrib.qasm_import import circuit_from_qasm
 from cirq import Simulator
-from collections import Counter
 
 
 class CirqEmulator(QuantumCodeExecutor):

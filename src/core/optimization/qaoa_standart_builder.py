@@ -10,4 +10,16 @@ class QAOAStandardBuilder(VariationalParameterBuilder):
     """
 
     def build(self, parametrization: np.ndarray) -> VariationalParameters:
-        ...
+        """
+        Constructs a complete set of variational parameters from the given parameterization.
+        For standard parameterization, it represents a call to the constructor of the ``VariationalParameters`` object.
+
+        Args:
+            parametrization: A NumPy array ``np.ndarray`` containing the values of the optimization variables
+                according to the selected parameterization.
+
+        Returns:
+            A ``VariationalParameters`` object containing the variational parameters
+            ready to be used for quantum circuit construction.
+        """
+        return VariationalParameters(parametrization)
