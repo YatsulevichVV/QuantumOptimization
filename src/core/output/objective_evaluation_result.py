@@ -52,4 +52,5 @@ class ObjectiveEvaluationResult:
         energy = 0
         for state, count in self.result.items():
             energy += count * objective.energy(np.array([int(bit) for bit in state]))
+        # TODO: продумать систему логирования
         return energy / self.total_count

@@ -1,5 +1,7 @@
-from objective_evaluation_result import ObjectiveEvaluationResult
+import numpy as np
+from src.core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from src.core.optimization.variational_parameters import VariationalParameters
+from src.core.input.problem_statement import ProblemStatement
 
 
 class OptimizationResult:
@@ -14,8 +16,6 @@ class OptimizationResult:
         The number of iterations of the optimization algorithm.
     optimal_parameters: VariationalParameters
         Optimal values of the VQA variational parameters.
-    problem_solution: list[int]
-        The solution of the optimization problem.
     """
 
     def __init__(
@@ -23,5 +23,15 @@ class OptimizationResult:
             measurements: list[ObjectiveEvaluationResult],
             iteration_count: int,
             optimal_parameters: VariationalParameters,
-            problem_solution: list[int]
-    ): ...
+    ):
+        if not isinstance(measurements, list):
+            raise TypeError("Measurements must be a list")
+        if not all([isinstance(measurement, ObjectiveEvaluationResult) for measurement in measurements]):
+            raise TypeError("Evert measurements must be a ObjectiveEvaluationResult")
+        if not isinstance(iteration_count, int):
+            raise TypeError("The attribute iteration_count must be a integer")
+        if not isinstance(optimal_parameters, VariationalParameters):
+            raise TypeError("The attribute optimal_parameters must be a VariationalParameters")
+        self.measurements = measurements
+        self.iteration_count = iteration_count
+        self.optimal_parameters = optimal_parameters

@@ -24,7 +24,7 @@ class QAOAAnsatzBuilder(QuantumCodeBuilder):
     def build_cost_hamiltonian(
             basis: QuantumCodeBasis,
             gamma: float,
-            matrix: QUBO,
+            matrix: ProblemStatement,
             n: int
     ) -> str:
         """

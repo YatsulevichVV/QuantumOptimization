@@ -1,10 +1,11 @@
 [project]
-name = "my-project"
-version = "0.0.7"
+name = "quantum-optimization"
+version = "0.0.8"
 description = "Framework for variational quantum algorithms"
 
 dependencies = [
     "numpy",
     "cirq",
-    "ply"
+    "ply",
+    "nevergrad"
 ]
