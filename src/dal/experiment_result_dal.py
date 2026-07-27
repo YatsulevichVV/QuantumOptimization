@@ -7,6 +7,7 @@ class ExperimentResultDAL(DataAccessLayer):
     Reading and recording of experimental results.
     """
 
+    # TODO: продумать смысл этого класса. Где будут рисоваться графики? Возможно здесь.
     def read(self, filename: str) -> ExperimentResult:
         ...
 

@@ -36,13 +36,11 @@ class OnePlusOneOptimizer(Optimizer):
             epsilon: float
     ):
         super().__init__(objective, initializer, parameters_builder, max_iterations, epsilon)
-        pass
 
     def optimize(
             self,
             objective: ProblemStatement,
             layers: int,
-            budget: int,
     ) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
@@ -56,7 +54,6 @@ class OnePlusOneOptimizer(Optimizer):
         Args:
             objective: The optimization problem to be encoded into the quantum circuit.
             layers: Number of layers in the circuit.
-            budget: Maximum number of calculations of the objective function.
 
         Returns:
             The ``OptimizationResult`` is the result of the optimization process, including the optimized
@@ -74,10 +71,10 @@ class OnePlusOneOptimizer(Optimizer):
         )
         optimizer = ng.optimizers.OnePlusOne(
             parametrization=instrument,
-            budget=budget
+            budget=self.max_iterations
         )
         measurements = []
-        for iteration in range(budget):
+        for iteration in range(self.max_iterations):
             candidate = optimizer.ask()
             measurement = self.objective.evaluate(self.parameters_builder.build(candidate.value), objective)
             measurements.append(measurement)
@@ -86,7 +83,7 @@ class OnePlusOneOptimizer(Optimizer):
         recommendation = optimizer.provide_recommendation()
         optimization_result = OptimizationResult(
             measurements,
-            budget,
+            self.max_iterations,
             self.parameters_builder.build(recommendation.value)
         )
         return optimization_result

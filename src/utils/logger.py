@@ -12,19 +12,15 @@ def get_logger(name: str) -> logging.Logger:
     Returns:
         logging.Logger: Configured logger instance.
     """
-    # Settings for logging
-    logger = logging.getLogger(name)
+    logger = logging.getLogger(name)                                    # Settings for logging
     logger.setLevel(logging.INFO)
     formatter = logging.Formatter(
         '%(asctime)s | %(name)s | %(levelname)s | %(message)s',
     )
-    # Handler for console-output messages
-    console = logging.StreamHandler()
+    console = logging.StreamHandler()                                   # Handler for console-output messages
     console.setFormatter(formatter)
-    # Handler for file-output messages
-    file = logging.FileHandler(filename="application.log", mode='w')
+    file = logging.FileHandler(filename="application.log", mode='w')    # Handler for file-output messages
     file.setFormatter(formatter)
-    # Building logger
-    logger.addHandler(console)
+    logger.addHandler(console)                                          # Building logger
     logger.addHandler(file)
     return logger
