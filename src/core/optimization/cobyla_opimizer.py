@@ -7,6 +7,7 @@ from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 from scipy.optimize import minimize
 
 
+# TODO: Сейчас этот оптимизатор решает исключительно стандартный QAOA. Нужно будет добавить общие ограничения.
 class COBYLAOptimizer(Optimizer):
     """
     COBYLA is a non-gradient optimization method from the SciPy library.

@@ -9,6 +9,7 @@ from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 from src.core.input.problem_statement import ProblemStatement
 
 
+# TODO: Сейчас этот оптимизатор решает исключительно стандартный QAOA. Нужно будет добавить общие ограничения.
 class OnePlusOneOptimizer(Optimizer):
     """
     OnePlusOne is a non-gradient optimization method from the nevergrad library.

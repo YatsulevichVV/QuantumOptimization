@@ -9,5 +9,16 @@ class Experiment(ABC):
     """
 
     @abstractmethod
-    def run(self) -> ExperimentResult:
-        ...
+    def run(self, *args) -> ExperimentResult:
+        """
+        Executes the variational quantum algorithm experiment.
+
+        This method performs a complete experiment, including all stages required
+        by the specific algorithm implementation, such as parameter initialization,
+        iterative optimization, quantum circuit evaluation, and result collection.
+
+        Returns:
+            An ``ExperimentResult`` object containing the outcomes of the
+            experiment, including the optimization history and the final solution.
+        """
+        pass

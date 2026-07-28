@@ -30,12 +30,12 @@ class QuantumCode:
         if code == '':
             raise ValueError('The code must not be an empty string.')
         # if not (isinstance(depth, int) and depth > 0):
-        #     raise TypeError('The depth must be an positive integer.')
+        #     raise TypeError('The depth must be a positive integer.')
         # if not (isinstance(gate_count, int) and gate_count > 0):
-        #     raise TypeError('The gate_count must be an positive integer.')
+        #     raise TypeError('The gate_count must be a positive integer.')
         # if not (isinstance(qubits_number, int) and qubits_number > 0):
-        #     raise TypeError('The qubits_number must be an positive integer.')
+        #     raise TypeError('The qubits_number must be a positive integer.')
         self.code = code
-        # self.depth = depth
-        # self.gate_count = gate_count
-        # self.qubits_number = qubits_number
+        self.depth = None
+        self.gate_count = None
+        self.qubits_number = None

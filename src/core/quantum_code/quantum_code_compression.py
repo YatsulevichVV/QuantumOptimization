@@ -11,4 +11,17 @@ class QuantumCodeCompression(ABC):
 
     @abstractmethod
     def compress(self, code: QuantumCode) -> QuantumCode:
-        ...
+        """
+        Compresses the specified quantum code.
+
+        Applies one or more circuit optimization techniques to reduce the number
+        of quantum gates and/or the circuit depth while preserving, as closely as
+        possible, the behavior of the original quantum circuit.
+
+        Args:
+            code: The quantum code to be compressed.
+
+        Returns:
+            A ``QuantumCode`` object representing the compressed quantum circuit.
+        """
+        pass

@@ -5,6 +5,7 @@ from src.core.output.objective_evaluation_result import ObjectiveEvaluationResul
 from src.core.quantum_code.quantum_code_basis import QuantumCodeBasis
 from src.core.quantum_code.quantum_code_builder import QuantumCodeBuilder
 from src.core.quantum_code.qaoa_ansatz_builder import QAOAAnsatzBuilder
+from src.core.quantum_code.quantum_code_compression import QuantumCodeCompression
 
 
 class ObjectiveEvaluator:
@@ -19,6 +20,9 @@ class ObjectiveEvaluator:
         The basic set of operators through which the quantum code will be constructed.
     code_builder:
         The builder of the quantum code in which the necessary ansatz is defined.
+    compressor:
+        An algorithm that optimizes a quantum circuit, that is,
+        it reduces the number of operators and the depth of the quantum circuit.
     """
 
     def __init__(
@@ -26,6 +30,7 @@ class ObjectiveEvaluator:
             executor: QuantumCodeExecutor,
             basis: QuantumCodeBasis,
             code_builder: QuantumCodeBuilder,
+            compressor: QuantumCodeCompression
     ):
         if not isinstance(executor, QuantumCodeExecutor):
             raise TypeError('The engine must be an instance of QuantumCodeExecutor')
@@ -36,6 +41,7 @@ class ObjectiveEvaluator:
         self.executor = executor
         self.basis = basis
         self.code_builder = code_builder
+        self.compressor = None
 
     def evaluate(
             self,
