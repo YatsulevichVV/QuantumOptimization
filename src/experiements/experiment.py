@@ -8,6 +8,9 @@ class Experiment(ABC):
     the standard QAOA algorithm, the recursive QAOA algorithm, and others.
     """
 
+    def __init__(self, *args):
+        pass
+
     @abstractmethod
     def run(self, *args) -> ExperimentResult:
         """

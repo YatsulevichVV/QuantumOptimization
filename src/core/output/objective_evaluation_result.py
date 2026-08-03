@@ -1,6 +1,9 @@
 from src.core.input.problem_statement import ProblemStatement
 import numpy as np
+from src.utils.logger import get_logger
 
+
+logger = get_logger(__name__)
 
 class ObjectiveEvaluationResult:
     """
@@ -52,6 +55,6 @@ class ObjectiveEvaluationResult:
         energy = 0
         for state, count in self.result.items():
             energy += count * objective.energy(np.array([int(bit) for bit in state]))
-        # TODO: продумать систему логирования
-        print(energy / self.total_count)
-        return energy / self.total_count
+        energy /= self.total_count
+        # logger.info(f"Average energy is {energy}")
+        return energy

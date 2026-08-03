@@ -10,7 +10,8 @@ class QuboDAL(DataAccessLayer):
     Reading and recording of problem statement.
     """
 
-    def read(self, filename: str) -> QUBO:
+    @staticmethod
+    def read(filename: str) -> QUBO:
         """
         Reads an optimization problem statement from the specified file.
 
@@ -36,7 +37,8 @@ class QuboDAL(DataAccessLayer):
             raise ValueError(f"Unsupported file extension: {extension}")
         return QUBO(matrix)
 
-    def write(self, filename: str, data: QUBO):
+    @staticmethod
+    def write(filename: str, data: QUBO):
         """
         Writes an optimization problem statement to the specified file.
 

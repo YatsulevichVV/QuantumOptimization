@@ -8,8 +8,8 @@ class DataAccessLayer(ABC):
     Data access interface. Two methods will be implemented in this interface: reading and writing.
     """
 
-    @abstractmethod
-    def read(self, filename: str) -> Any:
+    @staticmethod
+    def read(filename: str) -> Any:
         """
         Reads data from the specified file.
 
@@ -27,8 +27,8 @@ class DataAccessLayer(ABC):
             raise FileNotFoundError(f"File '{filename}' does not exist.")
         pass
 
-    @abstractmethod
-    def write(self, filename: str, data: Any):
+    @staticmethod
+    def write(filename: str, data: Any):
         """
         Writes data to the specified file.
 

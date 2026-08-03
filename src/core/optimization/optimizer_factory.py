@@ -7,7 +7,7 @@ from src.core.optimization.one_plus_one_optimizer import OnePlusOneOptimizer
 from src.core.optimization.cobyla_opimizer import COBYLAOptimizer
 
 
-class OptimizerFactory:
+class OptimizerBuilder:
     """
     Factory responsible for creating optimizer instances.
     """

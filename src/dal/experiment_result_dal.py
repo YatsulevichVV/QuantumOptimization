@@ -8,8 +8,10 @@ class ExperimentResultDAL(DataAccessLayer):
     """
 
     # TODO: продумать смысл этого класса. Где будут рисоваться графики? Возможно здесь.
-    def read(self, filename: str) -> ExperimentResult:
+    @staticmethod
+    def read(filename: str) -> ExperimentResult:
         ...
 
-    def write(self, filename: str, data: ExperimentResult):
+    @staticmethod
+    def write(filename: str, data: ExperimentResult):
         ...

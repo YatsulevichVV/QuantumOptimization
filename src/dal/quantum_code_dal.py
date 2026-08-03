@@ -8,7 +8,8 @@ class QuantumCodeDAL(DataAccessLayer):
     Reading and recording of quantum code in QASM format.
     """
 
-    def read(self, filename: str) -> QuantumCode:
+    @staticmethod
+    def read(filename: str) -> QuantumCode:
         """
         Reads quantum code in QASM format from the specified file.
 
@@ -30,7 +31,8 @@ class QuantumCodeDAL(DataAccessLayer):
             raise ValueError(f"Unsupported file extension: {extension}")
         return QuantumCode(data)
 
-    def write(self, filename: str, data: QuantumCode):
+    @staticmethod
+    def write(filename: str, data: QuantumCode):
         """
         Writes quantum code in QASM format to the specified file.
 

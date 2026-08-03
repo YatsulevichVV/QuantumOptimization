@@ -30,7 +30,7 @@ class ObjectiveEvaluator:
             executor: QuantumCodeExecutor,
             basis: QuantumCodeBasis,
             code_builder: QuantumCodeBuilder,
-            compressor: QuantumCodeCompression
+            compressor: object
     ):
         if not isinstance(executor, QuantumCodeExecutor):
             raise TypeError('The engine must be an instance of QuantumCodeExecutor')

@@ -8,13 +8,15 @@ from src.core.quantum_code.quantum_code_compression import QuantumCodeCompressio
 from src.core.quantum_code.quantum_code_builder import QuantumCodeBuilder
 from src.core.engine.quantum_code_executor import QuantumCodeExecutor
 
-from src.core.optimization.optimizer_factory import OptimizerFactory
+from src.core.optimization.optimizer_factory import OptimizerBuilder
 from src.core.optimization.variational_parameters_builder import VariationalParameterBuilder
 from src.core.optimization.optimizers_list import Optimizers
 from src.core.optimization.optimizer import Optimizer
 
 from src.core.input.qubo import QUBO
+from src.utils.logger import get_logger
 
+logger = get_logger(__name__)
 
 # TODO: Оптимизировать реализацию класса QAOA. Сейчас реализация очень громоздкая.
 class QAOA(Experiment):
@@ -90,7 +92,7 @@ class QAOA(Experiment):
         self.epsilon = epsilon
         self.objective_evaluator = ObjectiveEvaluator(engine, basis, code_builder, compressor)
         self.optimizer = optimizer
-        self.optimizer_engine = OptimizerFactory.create(
+        self.optimizer_engine = OptimizerBuilder.create(
             optimizer,
             self.objective_evaluator,
             initializer,
@@ -116,13 +118,21 @@ class QAOA(Experiment):
             the optimal variational parameters, and the final objective
             evaluation.
         """
-        optimizer_result = self.optimizer_engine.optimize(qubo, p)
-        parameters = optimizer_result.optimal_parameters
-        code = self.code_builder.build(self.basis, parameters, qubo)
-        result = self.engine.execute(code)
-        exp_result = ExperimentResult(
-            optimization_history=[optimizer_result],
-            final_measurement=result,
-            final_energy=result.get_energy(qubo)
-        )
-        return exp_result
+        try:
+            logger.info('The optimization process begins.')
+            optimizer_result = self.optimizer_engine.optimize(qubo, p)
+            logger.info('The optimizer has found a set of optimal parameters.')
+            parameters = optimizer_result.optimal_parameters
+            code = self.code_builder.build(self.basis, parameters, qubo)
+            result = self.engine.execute(code)
+            logger.info('The final run of the calculator is started on the selected parameters to save the result.')
+            exp_result = ExperimentResult(
+                optimization_history=[optimizer_result],
+                final_measurement=result,
+                final_energy=result.get_energy(qubo)
+            )
+            logger.info('The program was successfully completed')
+            return exp_result
+        except Exception as e:
+            logger.exception(e)
+            raise

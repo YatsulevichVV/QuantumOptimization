@@ -1,0 +1,18 @@
+{
+  "experiment": "qaoa",
+  "engine": {
+    "type": "cirq",
+    "number_shots": 1000
+  },
+  "basis": "rz_cnot",
+  "code_builder": "standard_qaoa",
+  "compressor": "",
+  "initializer": {
+    "type": "random_initialization_qaoa",
+    "seed": 100
+  },
+  "parameters_builder": "identety_variational_parameters",
+  "optimizer": "cobyla",
+  "max_iteration": 100,
+  "epsilon": 1.0
+}

@@ -73,7 +73,6 @@ class COBYLAOptimizer(Optimizer):
             x0=initial_params,
             method="COBYLA",
             options={
-                "matcher": self.max_iterations,
                 "disp": False
             }
         )
