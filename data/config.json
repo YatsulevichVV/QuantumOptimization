@@ -1,5 +1,8 @@
 {
-  "experiment": "qaoa",
+  "experiment": {
+    "type": "qaoa",
+    "layers": 4
+  },
   "engine": {
     "type": "cirq",
     "number_shots": 1000

@@ -7,7 +7,6 @@ from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 from scipy.optimize import minimize
 
 
-# TODO: Сейчас этот оптимизатор решает исключительно стандартный QAOA. Нужно будет добавить общие ограничения.
 class COBYLAOptimizer(Optimizer):
     """
     COBYLA is a non-gradient optimization method from the SciPy library.
@@ -39,7 +38,7 @@ class COBYLAOptimizer(Optimizer):
     def optimize(
             self,
             objective: ProblemStatement,
-            layers: int,
+            dimension: int,
         ) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
@@ -52,7 +51,7 @@ class COBYLAOptimizer(Optimizer):
 
         Args:
             objective: The optimization problem to be encoded into the quantum circuit.
-            layers: Number of layers in the circuit.
+            dimension: Dimension of the optimization space.
 
         Returns:
             The ``OptimizationResult`` is the result of the optimization process, including the optimized
@@ -66,8 +65,7 @@ class COBYLAOptimizer(Optimizer):
             measurements.append(computation_result)
             return computation_result.get_energy(objective)
 
-        p = layers
-        initial_params = self.initializer.initialize(p).parameters
+        initial_params = self.initializer.initialize(dimension).parameters
         result = minimize(
             fun=objective_function,
             x0=initial_params,

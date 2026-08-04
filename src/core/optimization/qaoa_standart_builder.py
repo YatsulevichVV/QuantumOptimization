@@ -22,4 +22,9 @@ class QAOAStandardBuilder(VariationalParameterBuilder):
             A ``VariationalParameters`` object containing the variational parameters
             ready to be used for quantum circuit construction.
         """
+        p = len(parametrization) // 2
+        for i in range(p):
+            parametrization[i] = np.mod(parametrization[i], 2 * np.pi)
+        for i in range(p, 2 * p):
+            parametrization[i] = np.mod(parametrization[i], np.pi)
         return VariationalParameters(parametrization)

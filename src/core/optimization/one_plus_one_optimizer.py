@@ -1,5 +1,6 @@
 import nevergrad as ng
 import numpy as np
+from sympy.physics.units import dimensions
 
 from src.core.optimization.optimizer import Optimizer
 from src.core.output.optimization_result import OptimizationResult
@@ -9,7 +10,6 @@ from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 from src.core.input.problem_statement import ProblemStatement
 
 
-# TODO: Сейчас этот оптимизатор решает исключительно стандартный QAOA. Нужно будет добавить общие ограничения.
 class OnePlusOneOptimizer(Optimizer):
     """
     OnePlusOne is a non-gradient optimization method from the nevergrad library.
@@ -41,7 +41,7 @@ class OnePlusOneOptimizer(Optimizer):
     def optimize(
             self,
             objective: ProblemStatement,
-            layers: int,
+            dimension: int,
     ) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
@@ -54,21 +54,16 @@ class OnePlusOneOptimizer(Optimizer):
 
         Args:
             objective: The optimization problem to be encoded into the quantum circuit.
-            layers: Number of layers in the circuit.
+            dimension: Dimension of the optimization space.
 
         Returns:
             The ``OptimizationResult`` is the result of the optimization process, including the optimized
             variational parameters, the corresponding objective function value,
             and additional optimization statistics.
         """
-        # TODO: Добавить начальную инициализацию и результирующий объект
-        p = layers
-        initial_params = self.initializer.initialize(p)
+        initial_params = self.initializer.initialize(dimension)
         instrument = ng.p.Array(
             init=initial_params.parameters
-        ).set_bounds(
-            [0] * (2 * p),
-            [2 * np.pi] * p + [np.pi] * p
         )
         optimizer = ng.optimizers.OnePlusOne(
             parametrization=instrument,

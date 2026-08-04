@@ -17,10 +17,10 @@ def get_logger(name: str) -> logging.Logger:
     formatter = logging.Formatter(
         '%(asctime)s | %(name)s | %(levelname)s | %(message)s',
     )
-    console = logging.StreamHandler()                                   # Handler for console-output messages
-    console.setFormatter(formatter)
+    # console = logging.StreamHandler()                                   # Handler for console-output messages
+    # console.setFormatter(formatter)
     file = logging.FileHandler(filename="application.log", mode='w')    # Handler for file-output messages
     file.setFormatter(formatter)
-    logger.addHandler(console)                                          # Building logger
+    # logger.addHandler(console)                                          # Building logger
     logger.addHandler(file)
     return logger

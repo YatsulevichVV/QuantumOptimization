@@ -90,7 +90,7 @@ class ExperimentBuilder:
         optimizer = self.optimizer_map[config['optimizer']]
         max_iterations = int(config['max_iteration'])
         epsilon = float(config['epsilon'])
-        return self.experiment_map[config['experiment']](
+        return self.experiment_map[config['experiment']['type']](
             engine,
             basis,
             code_builder,

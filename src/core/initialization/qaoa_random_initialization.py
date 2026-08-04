@@ -18,17 +18,19 @@ class QAOARandomInitializer(Initializer):
             raise TypeError("The seed should be an integer.")
         self.seed = seed
 
-    def initialize(self, p: int) -> VariationalParameters:
+    def initialize(self, dimension: int) -> VariationalParameters:
         """
         Generates random initial values for the variational parameters.
 
         Args:
-            p: The number of iterations in the QAOA algorithm
+            dimension: The dimension of the optimization space.
+                In the case of standard QAOA, dimension = 2 * p, where p is the number of iterations.
 
         Returns:
             A ``VariationalParameters`` object containing randomly generated
             initial values.
         """
+        p = dimension // 2
         gamma = np.random.uniform(low=0.0, high=2*np.pi, size=p)
         beta = np.random.uniform(low=0.0, high=np.pi, size=p)
         params = np.concatenate((gamma, beta))

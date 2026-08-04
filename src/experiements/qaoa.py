@@ -118,9 +118,10 @@ class QAOA(Experiment):
             the optimal variational parameters, and the final objective
             evaluation.
         """
+        # TODO: Размерность оптимизационного пространства сейчас жёстко зафиксировано как 2 * p, хотя могут быть и другие.
         try:
             logger.info('The optimization process begins.')
-            optimizer_result = self.optimizer_engine.optimize(qubo, p)
+            optimizer_result = self.optimizer_engine.optimize(qubo, 2 * p)
             logger.info('The optimizer has found a set of optimal parameters.')
             parameters = optimizer_result.optimal_parameters
             code = self.code_builder.build(self.basis, parameters, qubo)

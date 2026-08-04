@@ -1,4 +1,4 @@
-from dal import DataAccessLayer
+from src.dal.dal import DataAccessLayer
 from src.core.input.qubo import QUBO
 from pathlib import Path
 import numpy as np
