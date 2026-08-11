@@ -15,7 +15,7 @@
     "seed": 100
   },
   "parameters_builder": "identety_variational_parameters",
-  "optimizer": "cobyla",
+  "optimizer": "one_plus_one",
   "max_iteration": 100,
   "epsilon": 1.0
 }

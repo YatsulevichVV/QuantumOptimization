@@ -1,10 +1,9 @@
-from cmd import Cmd
+from cmd2 import Cmd
 import numpy as np
 from src.utils.logger import get_logger
 from src.dal.experiment_config import ExperimentConfigDAL
-from src.dal.qubo_dal import QuboDAL
+from src.dal.problem_statement_dal import ProblemStatementDAL
 from src.experiements.experiment_builder import ExperimentBuilder
-from src.core.input.qubo import QUBO
 
 
 logger = get_logger(__name__)
@@ -28,6 +27,7 @@ class Command(Cmd):
 
     def __init__(self):
         super().__init__()
+        self.prompt = 'quant-optimizer> '
         self.tensor = None
         self.config = None
 
@@ -73,8 +73,7 @@ class Command(Cmd):
             logger.info(f'quant-optimizer> input {arg}')
             args = arg.split()
             filename = args[0]
-            # TODO: Жёсткая привязка к матрице QUBO, такого быть не должно. Возможно нужно будет менять архитектуру DAL.
-            self.tensor = QuboDAL.read(filename)
+            self.tensor = ProblemStatementDAL.read(filename)
             self.stdout.write('Optimization problem has been successfully initialized.\n')
             logger.info('Optimization problem has been successfully initialized.')
         except Exception as e:

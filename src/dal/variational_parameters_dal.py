@@ -10,7 +10,8 @@ class VariationalParametersDAL(DataAccessLayer):
     Reading and recording of variational parameters.
     """
 
-    def read(self, filename: str) -> VariationalParameters:
+    @staticmethod
+    def read(filename: str, **kwargs) -> VariationalParameters:
         """
         Reads variational parameters from the specified file.
 
@@ -36,7 +37,8 @@ class VariationalParametersDAL(DataAccessLayer):
             raise ValueError(f"Unsupported file extension: {extension}")
         return VariationalParameters(parameters)
 
-    def write(self, filename: str, data: VariationalParameters):
+    @staticmethod
+    def write(filename: str, data: VariationalParameters, **kwargs):
         """
         Writes variational parameters to the specified file.
 

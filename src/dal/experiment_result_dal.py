@@ -10,8 +10,8 @@ class ExperimentResultDAL(DataAccessLayer):
     # TODO: продумать смысл этого класса. Где будут рисоваться графики? Возможно здесь.
     @staticmethod
     def read(filename: str) -> ExperimentResult:
-        ...
+        pass
 
     @staticmethod
     def write(filename: str, data: ExperimentResult):
-        ...
+        pass
