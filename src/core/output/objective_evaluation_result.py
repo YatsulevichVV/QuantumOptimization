@@ -31,6 +31,25 @@ class ObjectiveEvaluationResult:
         self.result = result
         self.total_count = sum(result.values())
 
+
+    def get_solution(self, head: int = 1) -> list[str]:
+        """
+        Returns the solution obtained from the experiment.
+
+        The method extracts the optimal solution from the experiment results and
+        represents it as a list of strings corresponding to the selected variables
+        or states of the optimization problem.
+
+        Args:
+            head: The count of the most frequent solutions.
+
+        Returns:
+            A list of strings representing the solution found by the algorithm.
+        """
+        top = sorted(self.result.items(), key=lambda x: x[1], reverse=True)[:head]
+        return [item[0] for item in top]
+
+
     def get_energy(self, objective: ProblemStatement) -> float:
         """
         Calculate the average energy from measurement results.

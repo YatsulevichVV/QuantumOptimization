@@ -15,6 +15,7 @@ from src.experiements.experiment import Experiment
 from src.utils.logger import get_logger
 from src.core.input.qubo import QUBO
 from src.core.engine.cirq_emulator import CirqEmulator
+from src.core.engine.qiskit_emulator import QiskitEmulator
 from src.core.initialization.qaoa_random_initialization import QAOARandomInitializer
 from src.core.quantum_code.objective_evaluator import ObjectiveEvaluator
 from src.core.optimization.variational_parameters import VariationalParameters
@@ -39,6 +40,7 @@ class ExperimentBuilder:
     }
     engine_map: dict[str, type[QuantumCodeExecutor]] = {
         "cirq": CirqEmulator,
+        "qiskit": QiskitEmulator
     }
     optimizer_map: dict[str, type[Optimizers]] = {
         "one_plus_one": Optimizers.OnePlusOne,
@@ -56,6 +58,8 @@ class ExperimentBuilder:
     compressor_map: dict[str, type[QuantumCodeExecutor]] = {}
     basis_map: dict[str, QuantumCodeBasis] = {
         "rz_cnot": QuantumCodeBasis.RZ_CNOT,
+        "rz_rzz": QuantumCodeBasis.RZ_RZZ,
+        "u3_cz": QuantumCodeBasis.U3_CZ
     }
 
     def build(self, config: dict[str, str]) -> Experiment:

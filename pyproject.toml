@@ -8,5 +8,8 @@ dependencies = [
     "cirq",
     "ply",
     "nevergrad",
-    "scipy"
+    "scipy",
+    "cmd2",
+    "qiskit",
+    "qiskit_aer"
 ]

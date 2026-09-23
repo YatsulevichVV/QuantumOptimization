@@ -1,7 +1,7 @@
 from src.core.output.optimization_result import OptimizationResult
 from src.core.output.objective_evaluation_result import ObjectiveEvaluationResult
 
-
+# TODO: Нужен ли этот класс?
 class ExperimentResult:
     """
     Stores the results obtained during the execution of a variational quantum
@@ -40,23 +40,6 @@ class ExperimentResult:
         self.optimization_history = optimization_history
         self.final_measurement = final_measurement
         self.final_energy = final_energy
-
-    def get_solution(self, head: int = 1) -> list[str]:
-        """
-        Returns the solution obtained from the experiment.
-
-        The method extracts the optimal solution from the experiment results and
-        represents it as a list of strings corresponding to the selected variables
-        or states of the optimization problem.
-
-        Args:
-            head: The count of the most frequent solutions.
-
-        Returns:
-            A list of strings representing the solution found by the algorithm.
-        """
-        top = sorted(self.final_measurement.result.items(), key=lambda x: x[1], reverse=True)[:head]
-        return [item[0] for item in top]
 
     def make_plot(self):
         ...

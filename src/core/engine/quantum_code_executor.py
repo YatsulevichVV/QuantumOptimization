@@ -13,7 +13,7 @@ class QuantumCodeExecutor(ABC):
         pass
 
     @abstractmethod
-    def execute(self, code: QuantumCode) -> ObjectiveEvaluationResult:
+    def execute(self, quantum_code: QuantumCode) -> ObjectiveEvaluationResult:
         """
         Execute quantum code and return the evaluation result.
 
@@ -24,7 +24,7 @@ class QuantumCodeExecutor(ABC):
 
         Parameters
         ----------
-        code : QuantumCode
+        quantum_code : QuantumCode
             Quantum program represented in QASM format together with its
             execution context and metadata.
 

@@ -1,3 +1,5 @@
+from core.optimization.variational_parameters import VariationalParameters
+from core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from src.experiements.experiment import Experiment
 from src.experiements.experiment_result import ExperimentResult
 
@@ -64,8 +66,9 @@ class QAOA(Experiment):
             parameters_builder: VariationalParameterBuilder,
             optimizer: Optimizers,
             max_iterations: int,
-            epsilon: float
+            epsilon: float,
     ):
+        super().__init__()
         if not isinstance(engine, QuantumCodeExecutor):
             raise TypeError("Engine must be an instance of QuantumCodeExecutor.")
         if not isinstance(basis, QuantumCodeBasis):
@@ -101,7 +104,8 @@ class QAOA(Experiment):
             epsilon
         )
 
-    def run(self, qubo: QUBO, p: int) -> ExperimentResult:
+    # TODO: Подправить набор аргументов
+    def optimize(self, qubo: QUBO, p: int) -> ExperimentResult:
         """
         Runs the QAOA experiment for the specified optimization problem.
 
@@ -118,7 +122,6 @@ class QAOA(Experiment):
             the optimal variational parameters, and the final objective
             evaluation.
         """
-        # TODO: Размерность оптимизационного пространства сейчас жёстко зафиксировано как 2 * p, хотя могут быть и другие.
         try:
             logger.info('The optimization process begins.')
             optimizer_result = self.optimizer_engine.optimize(qubo, 2 * p)
@@ -134,6 +137,33 @@ class QAOA(Experiment):
             )
             logger.info('The program was successfully completed')
             return exp_result
+        except Exception as e:
+            logger.exception(e)
+            raise
+
+    # TODO: Подправить набор аргументов
+    def run(self, qubo: QUBO, parameters: VariationalParameters) -> ObjectiveEvaluationResult:
+        """
+        Runs the QAOA algorithm for the given QUBO problem and variational
+        parameters.
+
+        The method constructs and executes a p-layer QAOA circuit using the
+        specified variational parameters and evaluates the QUBO objective
+        function from the resulting measurement samples.
+
+        Args:
+            qubo: QUBO problem to be solved.
+            parameters: Variational parameters of the QAOA circuit.
+
+        Returns:
+            ObjectiveEvaluationResult: Result of the QAOA execution, including
+                the measurement samples and the corresponding objective value.
+        """
+        try:
+            code = self.code_builder.build(self.basis, parameters, qubo)
+            result = self.engine.execute(code)
+            logger.info('The program was successfully completed')
+            return result
         except Exception as e:
             logger.exception(e)
             raise

@@ -18,6 +18,7 @@ class CirqEmulator(QuantumCodeExecutor):
     """
 
     def __init__(self, repetitions: int):
+        super().__init__()
         if not (isinstance(repetitions, int) and repetitions > 0):
             raise TypeError("The number of repetitions must be an positive integer.")
         self.repetitions = repetitions

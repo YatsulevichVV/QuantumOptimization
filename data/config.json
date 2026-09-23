@@ -4,10 +4,10 @@
     "layers": 4
   },
   "engine": {
-    "type": "cirq",
+    "type": "qiskit",
     "number_shots": 1000
   },
-  "basis": "rz_cnot",
+  "basis": "u3_cz",
   "code_builder": "standard_qaoa",
   "compressor": "",
   "initializer": {

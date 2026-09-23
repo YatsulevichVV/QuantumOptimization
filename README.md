@@ -12,8 +12,18 @@
 
 - Python
 - Cirq
+- Qiskit
 
 ## Launch
+
+```commandline
+$ pip install .
+$ python main.py
+quant-optimizer> config data/config.json
+quant-optimizer> input data/matrix.json
+quant-optimizer> optimize
+quant-optimizer> run
+```
 
 ## Developers
 

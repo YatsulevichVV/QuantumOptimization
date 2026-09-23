@@ -35,3 +35,5 @@ class OptimizationResult:
         self.measurements = measurements
         self.iteration_count = iteration_count
         self.optimal_parameters = optimal_parameters
+
+

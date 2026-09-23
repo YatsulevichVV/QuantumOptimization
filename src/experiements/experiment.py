@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+from core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from src.experiements.experiment_result import ExperimentResult
 
 
@@ -8,11 +10,11 @@ class Experiment(ABC):
     the standard QAOA algorithm, the recursive QAOA algorithm, and others.
     """
 
-    def __init__(self, *args):
+    def __init__(self):
         pass
 
     @abstractmethod
-    def run(self, *args) -> ExperimentResult:
+    def optimize(self, *args) -> ExperimentResult:
         """
         Executes the variational quantum algorithm experiment.
 
@@ -23,5 +25,21 @@ class Experiment(ABC):
         Returns:
             An ``ExperimentResult`` object containing the outcomes of the
             experiment, including the optimization history and the final solution.
+        """
+        pass
+
+    @abstractmethod
+    def run(self, *args) -> ObjectiveEvaluationResult:
+        """
+        Executes the configured variational quantum algorithm and evaluates
+        the objective function based on the obtained measurement results.
+
+        Args:
+            *args: Arguments required to configure and execute the algorithm.
+
+        Returns:
+            ObjectiveEvaluationResult: Result of the algorithm execution,
+                including the measurement results and the evaluated objective
+                value.
         """
         pass
