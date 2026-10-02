@@ -41,7 +41,7 @@ class OnePlusOneOptimizer(Optimizer):
     def optimize(
             self,
             objective: ProblemStatement,
-            dimension: int,
+            config: dict
     ) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
@@ -61,7 +61,7 @@ class OnePlusOneOptimizer(Optimizer):
             variational parameters, the corresponding objective function value,
             and additional optimization statistics.
         """
-        initial_params = self.initializer.initialize(dimension)
+        initial_params = self.initializer.initialize(config, objective)
         instrument = ng.p.Array(
             init=initial_params.parameters
         )

@@ -9,7 +9,7 @@ class QuantumCodeExecutor(ABC):
     It can be either a physical quantum computer or an emulator.
     """
 
-    def __init__(self, *args):
+    def __init__(self, config: dict):
         pass
 
     @abstractmethod

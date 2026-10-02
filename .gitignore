@@ -4,3 +4,4 @@
 __pycache__/
 /src/quantum_optimization.egg-info
 /build
+/bug

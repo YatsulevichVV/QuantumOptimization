@@ -17,8 +17,9 @@ class CirqEmulator(QuantumCodeExecutor):
         The number of repeated runs of the quantum code to collect statistics.
     """
 
-    def __init__(self, repetitions: int):
-        super().__init__()
+    def __init__(self, config):
+        super().__init__(config)
+        repetitions = config['engine']['number_shots']
         if not (isinstance(repetitions, int) and repetitions > 0):
             raise TypeError("The number of repetitions must be an positive integer.")
         self.repetitions = repetitions

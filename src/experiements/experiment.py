@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 
-from core.output.objective_evaluation_result import ObjectiveEvaluationResult
+from src.core.input.problem_statement import ProblemStatement
+from src.core.optimization.variational_parameters import VariationalParameters
+from src.core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from src.experiements.experiment_result import ExperimentResult
 
 
@@ -14,7 +16,7 @@ class Experiment(ABC):
         pass
 
     @abstractmethod
-    def optimize(self, *args) -> ExperimentResult:
+    def optimize(self, tensor: ProblemStatement, config: dict) -> ExperimentResult:
         """
         Executes the variational quantum algorithm experiment.
 
@@ -29,7 +31,7 @@ class Experiment(ABC):
         pass
 
     @abstractmethod
-    def run(self, *args) -> ObjectiveEvaluationResult:
+    def run(self, tensor: ProblemStatement, parameters: VariationalParameters) -> ObjectiveEvaluationResult:
         """
         Executes the configured variational quantum algorithm and evaluates
         the objective function based on the obtained measurement results.
@@ -41,5 +43,22 @@ class Experiment(ABC):
             ObjectiveEvaluationResult: Result of the algorithm execution,
                 including the measurement results and the evaluated objective
                 value.
+        """
+        pass
+
+    @abstractmethod
+    def initialize(self, config: dict, tensor: ProblemStatement) -> VariationalParameters:
+        """
+        Initialize variational parameters.
+
+        This method defines the interface for generating initial values of
+        variational parameters. Concrete initializers must implement this
+        method according to their initialization strategy.
+
+        Args:
+            *args: Arguments required by the concrete initialization strategy.
+
+        Returns:
+            VariationalParameters: Initialized variational parameters.
         """
         pass

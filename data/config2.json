@@ -1,0 +1,21 @@
+{
+  "experiment": {
+    "type": "qaoa",
+    "layers": 3
+  },
+  "engine": {
+    "type": "qiskit",
+    "number_shots": 1000
+  },
+  "basis": "u3_cz",
+  "code_builder": "standard_qaoa",
+  "compressor": "",
+  "initializer": {
+    "type": "nn_simple_perceptron_qaoa",
+    "seed": 100
+  },
+  "parameters_builder": "identety_variational_parameters",
+  "optimizer": "one_plus_one",
+  "max_iteration": 100,
+  "epsilon": 1.0
+}

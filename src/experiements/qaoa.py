@@ -1,3 +1,4 @@
+from core.input.problem_statement import ProblemStatement
 from core.optimization.variational_parameters import VariationalParameters
 from core.output.objective_evaluation_result import ObjectiveEvaluationResult
 from src.experiements.experiment import Experiment
@@ -105,7 +106,7 @@ class QAOA(Experiment):
         )
 
     # TODO: Подправить набор аргументов
-    def optimize(self, qubo: QUBO, p: int) -> ExperimentResult:
+    def optimize(self, tensor: ProblemStatement, config: dict) -> ExperimentResult:
         """
         Runs the QAOA experiment for the specified optimization problem.
 
@@ -124,16 +125,16 @@ class QAOA(Experiment):
         """
         try:
             logger.info('The optimization process begins.')
-            optimizer_result = self.optimizer_engine.optimize(qubo, 2 * p)
+            optimizer_result = self.optimizer_engine.optimize(tensor, config)
             logger.info('The optimizer has found a set of optimal parameters.')
             parameters = optimizer_result.optimal_parameters
-            code = self.code_builder.build(self.basis, parameters, qubo)
+            code = self.code_builder.build(self.basis, parameters, tensor)
             result = self.engine.execute(code)
             logger.info('The final run of the calculator is started on the selected parameters to save the result.')
             exp_result = ExperimentResult(
                 optimization_history=[optimizer_result],
                 final_measurement=result,
-                final_energy=result.get_energy(qubo)
+                final_energy=result.get_energy(tensor)
             )
             logger.info('The program was successfully completed')
             return exp_result
@@ -142,7 +143,7 @@ class QAOA(Experiment):
             raise
 
     # TODO: Подправить набор аргументов
-    def run(self, qubo: QUBO, parameters: VariationalParameters) -> ObjectiveEvaluationResult:
+    def run(self, tensor: ProblemStatement, parameters: VariationalParameters) -> ObjectiveEvaluationResult:
         """
         Runs the QAOA algorithm for the given QUBO problem and variational
         parameters.
@@ -160,10 +161,31 @@ class QAOA(Experiment):
                 the measurement samples and the corresponding objective value.
         """
         try:
-            code = self.code_builder.build(self.basis, parameters, qubo)
+            code = self.code_builder.build(self.basis, parameters, tensor)
             result = self.engine.execute(code)
             logger.info('The program was successfully completed')
             return result
+        except Exception as e:
+            logger.exception(e)
+            raise
+
+    def initialize(self, config: dict, tensor: ProblemStatement):
+        """
+        Initialize variational parameters for the specified number of layers.
+
+        The number of variational parameters is determined as twice the number
+        of QAOA layers, corresponding to one set of parameters for the phase
+        separator and one set for the mixer.
+
+        Args:
+            p: Number of QAOA layers.
+
+        Returns:
+            Initialized variational parameters.
+        """
+        try:
+            init = self.initializer.initialize(config, tensor)
+            return init
         except Exception as e:
             logger.exception(e)
             raise

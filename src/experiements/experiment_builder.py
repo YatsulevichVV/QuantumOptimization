@@ -1,6 +1,7 @@
 import numpy as np
 import random
 
+from src.core.initialization.nn_simple_perceptron import NNSimplePerceptronQAOA
 from src.core.engine.quantum_code_executor import QuantumCodeExecutor
 from src.core.initialization.initializer import Initializer
 from src.core.optimization.cobyla_opimizer import COBYLAOptimizer
@@ -42,12 +43,13 @@ class ExperimentBuilder:
         "cirq": CirqEmulator,
         "qiskit": QiskitEmulator
     }
-    optimizer_map: dict[str, type[Optimizers]] = {
+    optimizer_map: dict[str, Optimizers] = {
         "one_plus_one": Optimizers.OnePlusOne,
         "cobyla": Optimizers.COBYLA,
     }
     initializer_map: dict[str, type[Initializer]] = {
         "random_initialization_qaoa": QAOARandomInitializer,
+        "nn_simple_perceptron_qaoa": NNSimplePerceptronQAOA
     }
     code_builder_map: dict[str, type[QuantumCodeBuilder]] = {
         "standard_qaoa": QAOAAnsatzBuilder,
@@ -62,7 +64,7 @@ class ExperimentBuilder:
         "u3_cz": QuantumCodeBasis.U3_CZ
     }
 
-    def build(self, config: dict[str, str]) -> Experiment:
+    def build(self, config: dict) -> Experiment:
         """
         Builds and configures an experiment from the provided configuration.
 
@@ -85,11 +87,11 @@ class ExperimentBuilder:
         # TODO: доработать систему аргументов
         if not isinstance(config, dict):
             raise TypeError('Configuration must be a dictionary.')
-        engine = self.engine_map[config['engine']['type']](config['engine']['number_shots'])
+        engine = self.engine_map[config['engine']['type']](config)
         basis = self.basis_map[config['basis']]
         code_builder = self.code_builder_map[config['code_builder']]()
         compressor = None
-        initializer = self.initializer_map[config['initializer']['type']](config['initializer']['seed'])
+        initializer = self.initializer_map[config['initializer']['type']](config)
         parameters_builder = self.parameter_builder_map[config['parameters_builder']]()
         optimizer = self.optimizer_map[config['optimizer']]
         max_iterations = int(config['max_iteration'])

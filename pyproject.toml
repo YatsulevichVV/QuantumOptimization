@@ -1,6 +1,6 @@
 [project]
 name = "quantum-optimization"
-version = "0.0.13"
+version = "0.0.15"
 description = "Framework for variational quantum algorithms"
 
 dependencies = [
@@ -11,5 +11,6 @@ dependencies = [
     "scipy",
     "cmd2",
     "qiskit",
-    "qiskit_aer"
+    "qiskit-aer",
+    "torch"
 ]

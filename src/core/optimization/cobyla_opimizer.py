@@ -38,7 +38,7 @@ class COBYLAOptimizer(Optimizer):
     def optimize(
             self,
             objective: ProblemStatement,
-            dimension: int,
+            config: dict
         ) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
@@ -65,7 +65,7 @@ class COBYLAOptimizer(Optimizer):
             measurements.append(computation_result)
             return computation_result.get_energy(objective)
 
-        initial_params = self.initializer.initialize(dimension).parameters
+        initial_params = self.initializer.initialize(config, objective).parameters
         result = minimize(
             fun=objective_function,
             x0=initial_params,

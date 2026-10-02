@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+
+from core.input.problem_statement import ProblemStatement
 from src.core.output.optimization_result import OptimizationResult
 from src.core.optimization.variational_parameters_builder import VariationalParameterBuilder
 from src.core.initialization.initializer import Initializer
@@ -57,7 +59,7 @@ class Optimizer(ABC):
         self.epsilon = epsilon
 
     @abstractmethod
-    def optimize(self, *args) -> OptimizationResult:
+    def optimize(self, objective: ProblemStatement, config: dict) -> OptimizationResult:
         """
         Runs the optimization process to determine the optimal variational parameters.
 

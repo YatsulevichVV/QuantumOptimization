@@ -1,7 +1,7 @@
 {
   "experiment": {
     "type": "qaoa",
-    "layers": 4
+    "layers": 3
   },
   "engine": {
     "type": "qiskit",

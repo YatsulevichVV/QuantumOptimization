@@ -1,4 +1,4 @@
-from dal import DataAccessLayer
+from src.dal.dal import DataAccessLayer
 from src.core.optimization.variational_parameters import VariationalParameters
 from pathlib import Path
 import numpy as np
