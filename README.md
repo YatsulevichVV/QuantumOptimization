@@ -8,7 +8,7 @@ quantum optimization algorithm.
 The fundamental operation scheme of the framework is as follows. The program
 receives a QUBO matrix for a certain problem as input. Then, based on the QUBO
 matrix and certain values of the variational parameters, a quantum code is constructed
-in the QASM language [21]. This code is sent to a quantum computing emulator or
+in the QASM language. This code is sent to a quantum computing emulator or
 to a physical quantum processor. As a result of the emulation or direct quantum
 computing, the average energy value is determined. The found energy value and the
 variational parameters are passed to a certain optimizer.
