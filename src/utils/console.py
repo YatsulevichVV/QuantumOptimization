@@ -254,18 +254,18 @@ class Command(Cmd):
                 if energy < min_energy:
                     answer = x
                     min_energy = energy
-            if min_energy == -6:
-                self.count += 1
-            self.poutput(self.count)
+            # if min_energy == -6:
+            #     self.count += 1
+            # self.poutput(self.count)
 
 
             answer = Text(str(answer), Style(color="red"))
             min_energy = Text(str(min_energy), Style(color="green"))
             logger.info(f'The solution of the optimization problem: {answer} with energy {min_energy}.')
-            # self.poutput('The solution of the optimization problem: ', end='')
-            # self.poutput(answer, end='')
-            # self.poutput(' with energy ', end='')
-            # self.poutput(min_energy, end='.\n')
+            self.poutput('The solution of the optimization problem: ', end='')
+            self.poutput(answer, end='')
+            self.poutput(' with energy ', end='')
+            self.poutput(min_energy, end='.\n')
 
         except Exception as e:
             self.poutput(Text("ERROR: ", Style(color="red")), end='')
